@@ -1,6 +1,6 @@
 const express = require("express");
 const fetch = require("node-fetch");
-const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 
@@ -28,10 +28,7 @@ const parse = (response) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+app.use(cors());
 
 app.all("*", (req, res) => {
   const { method, body } = req;
